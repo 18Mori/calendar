@@ -1,0 +1,454 @@
+/* style.css */
+
+body {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align items to top */
+  min-height: 100vh;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.calendar-app-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 700px; /* Slightly wider */
+  box-sizing: border-box;
+  text-align: center; /* Center content */
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-header h2 {
+  margin: 0;
+  font-size: 1.6em;
+  color: #333;
+}
+
+.calendar-header p {
+  margin: 0;
+  font-size: 1.1em;
+  color: #666;
+}
+
+.current-month-year {
+  text-align: center;
+}
+
+.calendar-header button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 18px; /* Larger buttons */
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background-color 0.2s ease;
+}
+
+.calendar-header button:hover {
+  background-color: #0056b3;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px; /* Increased gap */
+}
+
+.calendar-day {
+  background-color: #e9e9e9;
+  border-radius: 4px;
+  padding: 12px 6px; /* Increased padding */
+  text-align: center;
+  min-height: 80px; /* More height for content */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.calendar-day:not(.padding):hover {
+  background-color: #dcdcdc;
+}
+
+.calendar-day .day-number {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px; /* Space below number */
+}
+
+.calendar-day.current-day {
+  background-color: #007bff;
+  color: white;
+}
+
+.calendar-day.current-day .day-number {
+   color: white;
+}
+
+.calendar-day.padding {
+  background-color: #f9f9f9;
+  color: #ccc;
+  cursor: default;
+}
+
+.event-indicators {
+  display: flex;
+  flex-wrap: wrap; /* Wrap indicators */
+  justify-content: center;
+  margin-top: auto; /* Push indicators to the bottom */
+}
+
+.event-indicator {
+  width: 8px; /* Larger indicator */
+  height: 8px;
+  background-color: #28a745; /* Green indicator */
+  border-radius: 50%;
+  margin: 1px; /* Space between indicators */
+}
+
+/* --- Modal Styles --- */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 100; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.6); /* Black w/ more opacity */
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto; /* Adjust margin */
+  padding: 30px; /* More padding */
+  border-radius: 8px;
+  width: 95%; /* More responsive width */
+  max-width: 500px; /* Max width */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+  position: relative;
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 30px; /* Larger close button */
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* --- Event Details Modal Specific Styles --- */
+#eventDetailsModal .modal-content h3 {
+  margin-top: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+#eventList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0; /* Add margin below list */
+}
+
+#eventList li {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 10px;
+  position: relative; /* For positioning buttons */
+}
+
+#eventList li strong {
+  display: block; /* Title on its own line */
+  font-size: 1.1em;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+#eventList li p {
+  margin: 0;
+  color: #555;
+  font-size: 0.9em;
+  white-space: pre-wrap; /* Preserve line breaks in description */
+}
+
+.event-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.event-actions button {
+  background: none;
+  border: none;
+  font-size: 0.9em;
+  cursor: pointer;
+  margin-left: 5px;
+  padding: 3px 5px;
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+}
+
+.event-actions .edit-event-btn {
+  color: #007bff;
+}
+
+.event-actions .delete-event-btn {
+  color: #dc3545;
+}
+
+.event-actions button:hover {
+  background-color: #eee;
+}
+
+
+/* --- Event Form Modal Specific Styles --- */
+#eventForm .form-group {
+  margin-bottom: 15px;
+}
+
+#eventForm label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+#eventForm input[type="text"],
+#eventForm input[type="date"],
+#eventForm input[type="time"],
+#eventForm textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Include padding and border in element's total width */
+  font-size: 1em;
+}
+
+#eventForm textarea {
+  resize: vertical; /* Allow vertical resize */
+  min-height: 80px;
+}
+
+.form-actions {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.form-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s ease;
+}
+
+.form-actions button[type="submit"] {
+  background-color: #28a745; /* Green save button */
+  color: white;
+  margin-left: 10px;
+}
+
+.form-actions button[type="submit"]:hover {
+   background-color: #218838;
+}
+
+.form-actions .cancel-button {
+  background-color: #6c757d; /* Grey cancel button */
+  color: white;
+}
+
+.form-actions .cancel-button:hover {
+  background-color: #5a6268;
+}
+
+
+.add-event-button {
+   background-color: #007bff;
+   color: white;
+   border: none;
+   padding: 10px 20px;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 1em;
+   margin-top: 20px; /* Space above the button */
+   transition: background-color 0.2s ease;
+}
+
+.add-event-button:hover {
+   background-color: #0056b3;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .calendar-app-container {
+      padding: 15px;
+  }
+
+  .calendar-header h2 {
+      font-size: 1.4em;
+  }
+
+  .calendar-header p {
+      font-size: 1em;
+  }
+
+  .calendar-header button {
+      padding: 8px 12px;
+      font-size: 1em;
+  }
+
+  .calendar-grid {
+      gap: 5px;
+  }
+
+  .calendar-day {
+      padding: 10px 5px;
+      min-height: 70px;
+  }
+
+  .calendar-day .day-number {
+      font-size: 1.2em;
+  }
+
+  .event-indicator {
+       width: 6px;
+       height: 6px;
+  }
+
+  .modal-content {
+      padding: 20px;
+  }
+
+  .close-button {
+       font-size: 26px;
+  }
+
+  #eventList li {
+      padding: 12px;
+  }
+
+   .event-actions button {
+      font-size: 0.8em;
+   }
+
+  .form-actions button {
+      padding: 8px 15px;
+      font-size: 0.9em;
+  }
+
+  .add-event-button {
+       padding: 8px 15px;
+       font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-app-container {
+      padding: 10px;
+  }
+
+  .calendar-header h2 {
+      font-size: 1.2em;
+  }
+
+  .calendar-header p {
+      font-size: 0.9em;
+  }
+
+   .calendar-header button {
+      padding: 6px 10px;
+      font-size: 0.9em;
+  }
+
+  .calendar-day {
+      padding: 8px 3px;
+      min-height: 60px;
+  }
+
+  .calendar-day .day-number {
+      font-size: 1em;
+  }
+
+  .event-indicator {
+       width: 5px;
+       height: 5px;
+       margin: 1px auto;
+  }
+
+  .modal-content {
+      padding: 15px;
+  }
+
+  .close-button {
+       font-size: 24px;
+       top: 5px;
+       right: 10px;
+  }
+
+   #eventList li {
+      padding: 10px;
+  }
+
+  .event-actions {
+       top: 5px;
+       right: 5px;
+  }
+
+  .event-actions button {
+      font-size: 0.7em;
+      padding: 2px 4px;
+   }
+
+  .form-actions button {
+      padding: 6px 10px;
+      font-size: 0.8em;
+  }
+
+   .add-event-button {
+       padding: 6px 10px;
+       font-size: 0.8em;
+  }
+}

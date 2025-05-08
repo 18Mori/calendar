@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Calendar with Event Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="demo.js"></script>
+</head>
+<body>
+
+    <div class="calendar-app-container">
+        <div class="calendar-header">
+            <button id="prevMonthBtn" aria-label="Previous Month">&lt;</button>
+            <div class="current-month-year">
+                <h2 id="monthDisplay"></h2>
+                <p id="yearDisplay"></p>
+            </div>
+            <button id="nextMonthBtn" aria-label="Next Month">&gt;</button>
+        </div>
+
+        <div class="calendar-weekdays">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+        </div>
+        <div class="calendar-grid" id="calendarGrid">
+            </div>
+
+        <button id="addEventCalendarBtn" class="add-event-button">Add New Event</button>
+    </div>
+
+    <div id="eventDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" data-modal="eventDetailsModal">&times;</span>
+            <h3 id="eventDetailsDate"></h3>
+            <ul id="eventList">
+                </ul>
+            <button id="addEventDayBtn" class="add-event-button">Add Event for this Day</button>
+        </div>
+    </div>
+
+    <div id="eventFormModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" data-modal="eventFormModal">&times;</span>
+            <h3 id="formTitle">Add New Event</h3>
+            <form id="eventForm">
+                <input type="hidden" id="event-id">
+                <div class="form-group">
+                    <label for="event-title">Title:</label>
+                    <input type="text" id="event-title" required>
+                </div>
+                 <div class="form-group">
+                    <label for="event-date">Date:</label>
+                    <input type="date" id="event-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-time">Time (Optional):</label>
+                    <input type="time" id="event-time">
+                </div>
+                <div class="form-group">
+                    <label for="event-description">Description (Optional):</label>
+                    <textarea id="event-description"></textarea>
+                </div>
+                <div class="form-actions">
+                     <button type="submit">Save Event</button>
+                     <button type="button" class="cancel-button" data-modal="eventFormModal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
